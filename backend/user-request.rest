@@ -1,0 +1,37 @@
+# Testing User API
+
+### Create User
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "12345678901",  
+    "password": "supersecret123"
+}
+
+### Get All Users
+GET http://localhost:5000/users
+
+### Get User by ID
+GET http://localhost:5000/users/5
+
+
+###
+http://localhost:5000/users/profile
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTczMjI4MDQ5MCwiZXhwIjoxNzMyMjg0MDkwfQ.4eFAhx3NI-UZtEUMrQEtosGnz1IuWNmhAUro4ZrWLrI
+
+### Update User
+PUT http://localhost:5000/users/5
+Content-Type: application/json
+
+{
+    "name": "John Smith",
+    "email": "johnsmith@example.com",
+    "phone": "12345678901",
+    "password": "newpassword123"
+}
+
+### Delete User
+DELETE http://localhost:5000/users/6

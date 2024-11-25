@@ -1,0 +1,32 @@
+### Mendapatkan Daftar Hotel
+GET http://localhost:5000/hotel
+
+
+### Mendapatkan Hotel Berdasarkan ID
+GET http://localhost:5000/hotel/1
+
+
+### Menambahkan Hotel Baru
+POST http://localhost:5000/hotel
+Content-Type: application/json
+
+{
+    "name": "Hotel Bintang Lima",
+    "location": "Jakarta",
+    "price": 1500000,
+    "image": "http://example.com/image.jpg"
+}
+
+### Mengupdate Data Hotel
+PATCH http://localhost:5000/hotel/1
+Content-Type: application/json
+
+{
+    "name": "Hotel Bintang Lima Updated",
+    "location": "Jakarta Updated",
+    "price": 1700000,
+    "image": "http://example.com/image_updated.jpg"
+}
+
+### Menghapus Hotel Berdasarkan ID
+DELETE http://localhost:5000/hotel/1

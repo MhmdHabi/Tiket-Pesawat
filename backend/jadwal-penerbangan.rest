@@ -1,0 +1,42 @@
+### mendapatkan semua jadwal penerbangan
+GET http://localhost:5000/jadwal-penerbangan
+
+### Mendapatkan Pemesanan Pesawat Berdasarkan ID (GET)
+GET http://localhost:5000/jadwal-penerbangan/1201
+
+
+### Menambahkan Pemesanan Pesawat Baru (POST)
+POST http://localhost:5000/jadwal-penerbangan/add
+Content-Type: application/json
+
+{
+  "pesawatId": 7,
+  "flightDate": "2024-12-25T10:00:00Z",
+  "departureTime": "2024-12-25T12:00:00Z",
+  "arrivalTime": "2024-12-25T14:30:00Z",
+  "destination": "Jakarta",
+  "origin": "Lombok",
+  "class": "Bussiness",
+  "price": 1000000
+}
+
+
+### Mengupdate Pemesanan Pesawat (PUT)
+PUT http://localhost:5000/jadwal-penerbangan/update/2
+Content-Type: application/json
+
+{
+  "pesawatId": 6,
+  "flightDate": "2024-12-26T10:00:00Z",
+  "departureTime": "2024-12-26T12:00:00Z",
+  "arrivalTime": "2024-12-26T14:30:00Z",
+  "destination": "Surabaya",
+  "origin": "Jakarta",
+  "class": "Business",
+  "price": 1500000
+}
+
+
+### Menghapus Pemesanan Pesawat (DELETE)
+DELETE http://localhost:5000/jadwal-penerbangan/1
+

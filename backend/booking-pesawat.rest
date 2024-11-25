@@ -1,0 +1,34 @@
+### Mendapatkan Daftar Pemesanan Pesawat (GET)
+GET http://localhost:5000/pesawat/bookings/index
+
+### Mendapatkan Pemesanan Pesawat Berdasarkan ID (GET)
+GET http://localhost:5000/pesawat/booking/2
+
+
+### Menambahkan Pemesanan Pesawat Baru (POST)
+POST http://localhost:5000/pesawat/book/flight
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "jadwalId": 1201,
+  "name": "John Doe",
+  "gender": "Male",
+  "country": "Indonesia",
+  "birthday": "1990-01-01T00:00:00Z",
+  "totalPrice": 1000000
+}
+
+
+
+### Mengupdate Pemesanan Pesawat (PUT)
+PUT http://localhost:5000/pesawat/booking/update/4
+Content-Type: application/json
+
+{
+  "seats": 7
+}
+
+### Menghapus Pemesanan Pesawat (DELETE)
+DELETE http://localhost:5000/pesawat/booking/4
+Accept: application/json

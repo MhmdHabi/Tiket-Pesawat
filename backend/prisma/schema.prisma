@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int              @id @default(autoincrement())
+  name            String
+  email           String           @unique
+  phone           String
+  gender          String?
+  country         String?
+  password        String
+  role            String           @default("user")
+  image           String?          // Menambahkan field image, opsional
+  birthday        DateTime?        // Menambahkan field birthday, opsional
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt @default(now())
+
+  bookingsPesawat BookingPesawat[]
+  bookingsHotel   BookingHotel[]
+}
+
+
+model Hotel {
+  id          Int           @id @default(autoincrement())
+  name        String
+  location    String
+  price       Float
+  image       String
+  rating      Float
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt @default(now())
+
+  bookings    BookingHotel[] // Relation to BookingHotel
+}
+
+
+model Pesawat {
+  id              Int              @id @default(autoincrement())
+  airline         String
+  logo            String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt @default(now())
+
+  jadwals         JadwalPenerbangan[]
+}
+
+model JadwalPenerbangan {
+  id              Int       @id @default(autoincrement())
+  pesawatId       Int
+  flightDate      DateTime
+  departureTime   String
+  arrivalTime     String
+  destination     String
+  origin          String
+  class           String
+  price           Float
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt @default(now())
+
+  pesawat         Pesawat   @relation(fields: [pesawatId], references: [id])
+  bookingsPesawat BookingPesawat[]
+}
+
+  model BookingPesawat {
+    id          Int              @id @default(autoincrement())
+    userId      Int
+    jadwalId    Int            
+    bookingDate DateTime         @default(now())
+    name        String
+    gender      String
+    country     String  
+    birthday    DateTime
+    totalPrice  Float            // Total harga untuk booking pesawat
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt @default(now())
+
+    user        User             @relation(fields: [userId], references: [id])
+    jadwal      JadwalPenerbangan @relation(fields: [jadwalId], references: [id])
+    payment     PaymentPesawat?   // Relasi balik ke PaymentPesawat
+  }
+
+  model PaymentPesawat {
+    id          Int              @id @default(autoincrement())
+    bookingId   Int              @unique
+    paymentDate DateTime         @default(now())
+    receipt     String
+    bank        String           // Nama bank
+    status      String           @default("proses") // Status pembayaran
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt @default(now())
+
+    booking     BookingPesawat   @relation(fields: [bookingId], references: [id])
+  }
+
+model BookingHotel {
+  id          Int      @id @default(autoincrement())
+  userId      Int 
+  hotelId     Int
+  checkInDate DateTime
+  checkOutDate DateTime
+  rooms       String
+  bookingDate DateTime @default(now())
+  totalPrice  Float    
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+  hotel       Hotel    @relation(fields: [hotelId], references: [id])
+  payment     PaymentHotel?  // Relasi balik ke PaymentHotel
+}
+
+
+
+model PaymentHotel {
+  id          Int           @id @default(autoincrement())
+  bookingId   Int           @unique
+  paymentDate DateTime      @default(now())
+  receipt     String        // Bukti pembayaran (e.g., URL atau file path)
+  bank        String        // Nama bank
+  status      String        @default("proses") // Status pembayaran
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt @default(now())
+
+  booking     BookingHotel  @relation(fields: [bookingId], references: [id])
+}
+
+
+

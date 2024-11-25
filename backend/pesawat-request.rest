@@ -1,0 +1,34 @@
+### Mendapatkan Daftar Pesawat
+GET http://localhost:5000/pesawat
+
+
+### Mendapatkan Pesawat Berdasarkan ID
+GET http://localhost:5000/pesawat/5
+
+
+### Menambahkan Pesawat Baru
+POST http://localhost:5000/pesawat/add
+Content-Type: application/json
+
+{
+  "airline": "Sriwijaya Air",
+  "logo": "https://sriwijaya.logo.url"
+}
+
+
+
+
+### Mengupdate Data Pesawat
+PUT http://localhost:5000/pesawat/update/6
+Content-Type: application/json
+
+{
+  "airline": "Garuda Indonesia",
+  "logo": "https://garuda.logo.url"
+}
+
+
+
+
+### Menghapus Pesawat Berdasarkan ID
+DELETE http://localhost:5000/pesawat/4
